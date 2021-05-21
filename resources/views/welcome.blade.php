@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- I tried seperating the Registration and Login-pages to indivdual pages, but -->
+<!-- Ich hab funktionstechnisch nix verändern können ihr Beispiel war perfekt. Deswegen habe ich mich Designstechnisch kreativ ausgelassen, ich hoffe das reicht Ihnen an Unterschied,-->
 <h1 class="text-center">Forum</h1>
 <div class="card text-dark bg-light mb-3 col-6">
     <div class="card-body unicorn">
