@@ -36,6 +36,8 @@ class LoginTest extends DuskTestCase
 
                     $browser->visit('/home')
                             ->assertSee($user->name);
+
+                    $this->assertAuthenticated();
         });
     }
 
@@ -64,17 +66,31 @@ class LoginTest extends DuskTestCase
         });
     }
 
-    public function testHome()
+    public function TestCreatePostView($first)
     {
         use DatabaseMigrations;
 
-        $this->browse(function ($first, $second) {
-            $first->loginAs(User::find(1))
-                  ->visit('/home');
-        });
+        $first->loginAs(User::find(1)->visit('/home');
 
         $browser->clickLink('Create new Post');
 
+        $response->assertViewIs('post-detail');
 
     }
+
+    public function TestLogout($first)
+    {
+        use DatabaseMigrations;
+
+        $first->loginAs(User::find(1))
+
+        $response = $this->get('/home');
+
+        $browser->clickLink('Logout');
+
+        $response->assertViewIs('welcome');
+
+    }
+
+
 }

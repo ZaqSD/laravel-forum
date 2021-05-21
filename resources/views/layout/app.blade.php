@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="container unicorn">
+    <div class="container">
 
         @yield('content')
     </div>

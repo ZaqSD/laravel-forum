@@ -18,7 +18,7 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                @if($user->id === $loggedInUser->id)
+                @if($user->id === $loggedInUser->id || $loggedInUser->isMod)
                 <a href="/user/{{ $user->id }}" class="btn btn-warning">Edit</a>
                 @endif
             </td>
@@ -26,4 +26,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="/home" class="btn btn-dark btn-lg">Home</a>
 @endsection

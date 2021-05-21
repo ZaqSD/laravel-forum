@@ -14,4 +14,9 @@ class HomeController extends Controller
             'posts' => Post::all()->sortByDesc('created_at'),
         ]);
     }
+
+    public function register()
+    {
+        return view( 'register');
+    }
 }

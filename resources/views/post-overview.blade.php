@@ -26,4 +26,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="/home" class="btn btn-dark btn-lg">Home</a>
 @endsection

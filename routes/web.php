@@ -36,5 +36,6 @@ Route::middleware( 'auth' )->group( function ()
     Route::get('/post/{id}', [PostController::class, 'edit']);
     Route::get('/post/delete/{id}', [PostController::class, 'delete']);
 
+    Route::get('/registerpage', [HomeController::class, 'register']);
     Route::post('/userexit', [UserController::class, 'logout']);
 });

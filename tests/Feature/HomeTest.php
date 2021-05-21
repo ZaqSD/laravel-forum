@@ -15,6 +15,10 @@ class HomeTest extends TestCase
      */
     public function SiteWorks()
     {
-        $response->assertStatus(200);
+        $this>get('/home')
+            ->assertStatus(200)
+            ->assertSee('Forum')
+            ->assertSee('My Profile')
+            ->assertSee('Create new Post');
     }
 }

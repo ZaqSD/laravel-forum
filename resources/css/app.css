@@ -1,5 +1,6 @@
 .unicorn {
     color: #ff10f0;
+    text-shadow: -10px 0 black, 0 10px black, 10px 0 black, 0 -10px black;
     background: url(/../img/unicorn.jpg);
     background-size: contain;
 }
