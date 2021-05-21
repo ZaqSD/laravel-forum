@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,11 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        $post = Post::find( $id );
+
         return view( 'post-detail', [
-            'post' => Post::find( $id ),
+            'post' => $post,
+            'author' => $post->user, 
         ] );
     }
 

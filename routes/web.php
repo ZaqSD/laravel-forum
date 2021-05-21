@@ -25,7 +25,7 @@ Route::middleware( 'auth' )->group( function ()
 {
     Route::get('/home', [HomeController::class, 'index']);
 
-    Route::get('/user', [UserController::class, 'index'])->middleware('');
+    Route::get('/user', [UserController::class, 'index'])->middleware('admin');
     Route::get('/user/{id}', [UserController::class, 'edit']);
     Route::put('/user/{id}', [UserController::class, 'update']);
 

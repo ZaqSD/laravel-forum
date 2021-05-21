@@ -9,7 +9,7 @@
     <div class="card">
         <div class=" card-body">
             <h2 class="card-title">Moderator Panel</h2>
-            <a href="/user" class="btn btn-secondary">User Management</a>
+            <a href="/user" class="btn btn-secondary btn-pink">User Management</a>
         </div>
     </div>
     @endif
@@ -30,9 +30,9 @@
     <div class="card">
         <div class="card-body">
             <div class="list-group">
-                <a href="/post/create" class="list-group-item list-group-item-action active btn btn-primary btn-lg text-center">Create new Post</a>
+                <a href="/post/create" class="list-group-item list-group-item-action active btn btn-primary btn-lg text-center" dusk="create-button">Create new Post</a>
                 @foreach($posts as $post)
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="/post/{{ $post->id }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $post->title }}</h5>
                         <small>{{ $post->created_at }}</small>

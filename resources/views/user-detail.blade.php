@@ -16,6 +16,7 @@
                 <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/home" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </div>

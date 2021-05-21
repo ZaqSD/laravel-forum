@@ -11,7 +11,7 @@ class HomeController extends Controller
     {
         return view( 'home', [
             'user' => auth()->user(),
-            'posts' => Post::all(),
+            'posts' => Post::all()->sortByDesc('created_at'),
         ]);
     }
 }
