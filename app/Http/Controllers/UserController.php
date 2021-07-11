@@ -9,16 +9,22 @@ class UserController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+        $this->authorize('view', $users);
+
         return view( 'user-overview', [
-            'users' => User::all(),
+            'users' => $users,
             'loggedInUser' => auth()->user(),
         ] );
     }
 
     public function edit($id)
     {
+        $user = User::find( $id );
+        $this->authorize('view', $user);
+
         return view( 'user-detail', [
-            'user' => User::find( $id ),
+            'user' => $user,
         ] );
     }
 
@@ -30,6 +36,7 @@ class UserController extends Controller
         ]);
 
         $user = User::find( $id );
+        $this->authorize('update', $user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
@@ -46,9 +53,7 @@ class UserController extends Controller
 public function logout(Request $request)
 {
     Auth::logout();
-
     $request->session()->invalidate();
-
     $request->session()->regenerateToken();
 
     return redirect('/');

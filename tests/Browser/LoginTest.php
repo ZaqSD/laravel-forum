@@ -15,9 +15,37 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-    public function testExample()
-    {
 
+    public function testRegistration()
+    {
+        use DatabaseMigrations;
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit('/login')
+                    ->type('name', 'Andreas')
+                    ->type('email', 'andreas.siaplaouras@gmail.com')
+                    ->type('password', 'abcd1234')
+                    ->type('password-confirmation', 'abcd1234')
+                    ->press('Register')
+                    ->assertPathIs('/');
+
+        });
+    }
+
+    public function testUnauthLogin(){
+     
+        use DatabaseMigrations;
+
+            $browser->visit('/home')
+                    ->assertSee('Login')
+                    ->assertSee('Registration Form');
+
+            $this->assertAuthenticated();
+        })
+    }
+
+    public function testAuthLogin(){
+     
         use DatabaseMigrations;
 
         $user = User::create([
@@ -26,24 +54,53 @@ class LoginTest extends DuskTestCase
             'password' => 'abcd1234'
         ]);
 
-        $this->browse(function ($browser) use ($user) {
-            $browser->visit('/login')
-                    ->type('email', $user->email)
-                    ->type('password', $user->password)
-                    ->type('name', $user->name)
-                    ->press('Login')
-                    ->assertPathIs('/home');
+        $this->browse(function ($browser){
 
-                    $browser->visit('/home')
-                            ->assertSee($user->name);
+            $browser->visit('/')
+                    ->type('email',$user->email)
+                    ->type('password',$user->password)
+                    ->press('Login');
 
-                    $this->assertAuthenticated();
-        });
+            $browser->visit('/home')
+                    ->assertSee($user->name)
+                    ->assertSee('Edit Profile')
+                    ->assertSee('My Posts')
+                    ->assertSee('Logout')
+                    ->assertSee('Create new Post')
+
+            $this->assertAuthenticated();
+        })
+    }
+
+    public function testUnauthUserList(){
+        $this->browse(function ($browser){
+
+            $browser->visit('/user')
+            ->assertSee('403')
+        })
+    }
+
+    public function testAuthUserList(){
+        $this->browse(function ($browser){
+            $browser->visit('/')
+                    ->type('email',$user->email)
+                    ->type('password',$user->password)
+                    ->press('Login');
+
+            $browser->visit('/user')
+                    ->assertDontSee('403');
+        })
     }
 
     public function testElements()
     {
         use DatabaseMigrations;
+
+        $user = User::create([
+            'email' => 'andreas.siaplaouras@gmail.com',
+            'name' => 'Andreas',
+            'password' => 'abcd1234'
+        ]);
 
         $post = Post::create([
             'id' => '1',
@@ -52,7 +109,13 @@ class LoginTest extends DuskTestCase
             'author' => '1'
         ]);
 
-        $this->browse(function ($browser) use ($post) {
+        $this->browse(function ($browser){
+
+            $browser->visit('/')
+                    ->type('email',$user->email)
+                    ->type('password',$user->password)
+                    ->press('Login');
+
             $browser->visit('/post')
                     ->type('title', $post->title)
                     ->type('name', $post->content)

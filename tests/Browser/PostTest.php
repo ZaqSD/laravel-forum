@@ -17,12 +17,12 @@ class PostTest extends DuskTestCase
     {
         use DatabaseMigrations;
 
-        $post = new Post;
+        $post = Post::create();
         $post->id = '1';
         $post->user_id = '1';
         $post->save();
 
-        $user = new User;
+        $user = User::create();
         $user->id = '1';
         $user->save();
 
@@ -39,12 +39,12 @@ class PostTest extends DuskTestCase
     {
         use DatabaseMigrations;
 
-        $post = new Post;
+        $post = Post::create();
         $post->id = '1';
         $post->user_id = '2';
         $post->save();
 
-        $user = new User;
+        $user = User::create();;
         $user->id = '1';
         $user->save();
 
